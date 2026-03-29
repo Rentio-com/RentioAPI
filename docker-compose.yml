@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  db:
+    image: postgis/postgis:16-3.4-alpine
+    container_name: db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: super_secret_password_123
+      POSTGRES_DB: rental_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "db_isready -U admin -d rental_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  # backend:
+  #   build:
+  #     context: .
+  #     dockerfile: dockerfile
+  #   container_name: java_backend
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/rental_db
+  #     - SPRING_DATASOURCE_USERNAME=admin
+  #     - SPRING_DATASOURCE_PASSWORD=super_secret_password_123
+  #   depends_on:
+  #     - db
+volumes:
+  data:
