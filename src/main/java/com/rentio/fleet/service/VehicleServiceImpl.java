@@ -1,4 +1,4 @@
-package com.rentio.v1.fleet;
+package com.rentio.fleet.service;
 
 public class VehicleServiceImpl {
     

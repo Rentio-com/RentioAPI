@@ -1,4 +1,4 @@
-package com.rentio.v1.fleet.enums;
+package com.rentio.fleet.enums;
 
 public enum Transmission {
     MANUAL, AUTOMATIC
