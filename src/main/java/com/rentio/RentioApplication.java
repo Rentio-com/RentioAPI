@@ -1,4 +1,4 @@
-package com.rentio.v1;
+package com.rentio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
