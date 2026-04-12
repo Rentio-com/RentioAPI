@@ -1,12 +1,17 @@
-package com.rentio.v1.fleet;
+package com.rentio.fleet.model;
 
 import java.util.Map;
+import java.util.UUID;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import com.rentio.v1.fleet.enums.EngineType;
-import com.rentio.v1.fleet.enums.Transmission;
+import com.rentio.common.enums.VehicleSegment;
+import com.rentio.common.enums.VehicleType;
+import com.rentio.common.model.BaseEntity;
+import com.rentio.fleet.enums.EngineType;
+import com.rentio.fleet.enums.Transmission;
+import com.rentio.fleet.enums.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,6 +22,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,17 +34,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
-public class Vehicle {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Vehicle extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false, unique = true, updatable = false)
+    private UUID id;
 
     // Rental companies relation
-    @Column(name = "rental_id", nullable = false)
-    private Long rental_id;
+    @Column(name = "company_id", nullable = false)
+    private UUID companyId;
 
     @Column(name = "make", nullable = false)
     @NonNull
@@ -50,28 +56,52 @@ public class Vehicle {
     @NotBlank
     private String model;
 
+    @Column(name = "type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private VehicleType type;
+
+    @Column(name = "segment", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private VehicleSegment segment;
+
     @Column(name = "license_plate", nullable = false, unique = true)
     @NonNull
     @NotBlank
     private String licensePlate;
 
-    @Column(name = "engine_info", nullable = false)
+    @Column(name = "vin", nullable = false, unique = true)
     @NonNull
     @NotBlank
+    private String vin;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    @NonNull
+    @NotBlank 
+    private Status status;
+
+    @Column(name = "production_year", nullable = true)
+    private int productionYear;
+
+    @Column(name = "engine_info", nullable = true)
     private String engineInfo;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "engine_type", nullable = false)
-    @NonNull
     private EngineType engineType;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "transmission", nullable = false)
-    @NonNull
     private Transmission transmission;
 
+    @Column(name = "color", nullable = true)
+    private String color;
+
     @Column(name = "fuel_level", nullable = false)
-    private double fuelLevel;
+    private int fuelLevel;
+
+    @Column(name = "mileage", nullable = false)
+    private int mileage;
     
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "features", nullable = true, columnDefinition = "jsonb")
@@ -82,4 +112,10 @@ public class Vehicle {
     // Vehicle Events relation
 
     // Pricing Strategies relation
+
+    // Vehicle type relation
+
+    // Related entities - query via:
+    // rentalRepository.findByVechicleId(id)
+    // vehicleNoteRepository.finyByVehicleId(id)
 }
