@@ -31,7 +31,7 @@ import lombok.Setter;
 public class Addon extends BaseEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private UUID id;
 

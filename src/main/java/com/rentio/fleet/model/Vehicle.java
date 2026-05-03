@@ -42,7 +42,6 @@ public class Vehicle extends BaseEntity {
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private UUID id;
 
-    // Rental companies relation
     @Column(name = "company_id", nullable = false)
     private UUID companyId;
 
@@ -106,6 +105,10 @@ public class Vehicle extends BaseEntity {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "features", nullable = true, columnDefinition = "jsonb")
     private Map<String, Object> features;
+
+    // --- Relationships ---
+    // Child -> Insurance
+    // Child -> Notes(EntityType = VEHICLE)
 
     // Vehicle Documents relation
 
