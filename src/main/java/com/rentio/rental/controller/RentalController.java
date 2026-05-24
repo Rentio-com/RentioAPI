@@ -3,7 +3,6 @@ package com.rentio.rental.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rentio.common.dto.PaginationAndSortResponse;
-import com.rentio.note.enums.NoteEntityType;
 import com.rentio.rental.service.RentalService;
 
 import java.util.UUID;
@@ -32,15 +31,5 @@ public class RentalController {
     public Object getRentalById(@PathVariable UUID id) {
         return rentalService.getRentalById(id);
     }
-    
-    @GetMapping("/rental/{id}/notes")
-    public PaginationAndSortResponse<?> getRentalNotes(
-        @PathVariable UUID id,
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "20") int size
-    ) {
-       return PaginationAndSortResponse.from(rentalService.getRentalNotes(PageRequest.of(page, size), id, NoteEntityType.RENTAL));
-    }
-    
     
 }

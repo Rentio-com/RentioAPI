@@ -2,7 +2,6 @@ package com.rentio.fleet.controller;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +10,7 @@ import com.rentio.fleet.interfaces.common.InsuranceView;
 import com.rentio.fleet.service.InsuranceService;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/v1/insurance")
+@RequiredArgsConstructor
 public class InsuranceController {
 
-    @Autowired
-    private InsuranceService insuranceService;
+    private final InsuranceService insuranceService;
 
     @GetMapping("/{id}")
     public InsuranceView getInsuranceById(
