@@ -3,7 +3,6 @@ package com.rentio.fleet.service;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -12,17 +11,15 @@ import com.rentio.fleet.dto.response.VehicleDefaultResponse;
 import com.rentio.fleet.interfaces.common.VehicleView;
 import com.rentio.fleet.model.Vehicle;
 import com.rentio.fleet.repository.VehicleRepository;
-import com.rentio.note.service.NoteService;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class VehicleService {
 
-    @Autowired
-    private VehicleRepository vehicleRepository;
-
-    @Autowired
-    private NoteService noteService;
-
+    private final VehicleRepository vehicleRepository;
+    
     public Page<?> listVehicles(Pageable pageable) {
         Page<Vehicle> vehiclePage = vehicleRepository.findAll(pageable);
 

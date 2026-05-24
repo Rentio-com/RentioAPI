@@ -6,11 +6,11 @@ import java.util.UUID;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import com.rentio.common.enums.VehicleSegment;
-import com.rentio.common.enums.VehicleType;
 import com.rentio.common.model.BaseEntity;
 import com.rentio.fleet.enums.EngineType;
 import com.rentio.fleet.enums.Transmission;
+import com.rentio.fleet.enums.VehicleSegment;
+import com.rentio.fleet.enums.VehicleType;
 import com.rentio.fleet.enums.Status;
 
 import jakarta.persistence.Column;

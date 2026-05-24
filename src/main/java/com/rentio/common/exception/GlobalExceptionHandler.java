@@ -33,9 +33,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handleEnumError(HttpMessageNotReadableException ex) {
         
-        String message = (ex.getMessage().split(":")[2] + ex.getMessage().split(":")[3]).strip();
-
-        return ResponseEntity.status(400).body(new ErrorResponse(400, ExceptionResponseCode.VALIDATION_FAILED, message));
+        return ResponseEntity.status(400).body(new ErrorResponse(400, ExceptionResponseCode.VALIDATION_FAILED, ex.getMessage()));
     }
 
     @ExceptionHandler(BussinesException.class)

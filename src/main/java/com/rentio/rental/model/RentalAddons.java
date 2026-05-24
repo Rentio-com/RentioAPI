@@ -3,8 +3,6 @@ package com.rentio.rental.model;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import com.rentio.common.enums.AddonPricingType;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

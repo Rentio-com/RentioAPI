@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.rentio.common.enums.VehicleSegment;
-import com.rentio.common.enums.VehicleType;
 import com.rentio.common.model.BaseEntity;
 import com.rentio.rental.enums.RentalStatus;
 
@@ -57,14 +55,14 @@ public class Rental extends BaseEntity {
     private UUID vehicleId;
 
     @Column(name = "vehicle_type", nullable = false)
-    @Enumerated(EnumType.STRING)
     @NonNull
-    private VehicleType vehicleType;
+    @NotBlank
+    private String vehicleType;
 
     @Column(name = "vehicle_segment", nullable = false)
-    @Enumerated(EnumType.STRING)
     @NonNull
-    private VehicleSegment vehicleSegment;
+    @NotBlank
+    private String vehicleSegment;
 
     // --- Dates ---
     @Column(name = "scheduled_pickup", nullable = false)

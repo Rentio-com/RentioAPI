@@ -2,40 +2,33 @@ package com.rentio.fleet.controller;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rentio.common.dto.PaginationAndSortResponse;
-import com.rentio.fleet.dto.insurance.CreateInsuranceRequest;
-import com.rentio.fleet.interfaces.common.InsuranceView;
 import com.rentio.fleet.interfaces.common.VehicleView;
 import com.rentio.fleet.service.InsuranceService;
 import com.rentio.fleet.service.VehicleService;
 
-import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
 
 @RestController
 @RequestMapping("/api/v1/vehicle")
+@RequiredArgsConstructor
 public class VehicleController {
 
-    @Autowired
-    private VehicleService vehicleService;
-
-    @Autowired
-    private InsuranceService insuranceService;
+    private final VehicleService vehicleService;
+    private final InsuranceService insuranceService;
 
     // --- Vehicle ---
     @GetMapping
@@ -58,12 +51,12 @@ public class VehicleController {
         return PaginationAndSortResponse.from(insuranceService.listInsuranceByVehicleId(id, pageable));
     }
 
-    @PostMapping("/{id}/insurance")
-    public InsuranceView createInsurance(
-        @PathVariable UUID id,
-        @Valid @RequestBody CreateInsuranceRequest request
-    ) {
-        return insuranceService.create(id, request);
-    }
+    // @PostMapping("/{id}/insurance")
+    // public InsuranceView createInsurance(
+    //     @PathVariable UUID id,
+    //     @Valid @RequestBody CreateInsuranceRequest request
+    // ) {
+    //     return insuranceService.create(id, request);
+    // }
     
 }
